@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
 		server1.vm.hostname="gitdevserv"
 		# server1.vm.network "forwarded_port", guest: 80, host: 8083
 		server1.vm.network "private_network", ip: "172.20.20.10"
-		server1.vm.provision "netw", run: "always", type: "shell", path: "int.sh"
+		server1.vm.provision "netw", run: "always", type: "shell", inline: "sudo nmcli connection reload && sudo systemctl restart network.service"
 		server1.vm.provision "get_git", type: "shell", inline: "sudo yum install git -y"
 	end
 =begin	
